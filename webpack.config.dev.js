@@ -63,7 +63,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'JavaScript SchamaScript',
             template: 'web/index.dev.html',
-            favicon: 'web/favicon.png'
+            favicon: 'web/favicon.ico'
         }),
         new webpack.DefinePlugin({
             __DEVELOPMENT__: process.env.NODE_ENV === 'development',

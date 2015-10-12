@@ -61,7 +61,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'Pekkis Goes To Movies',
             template: 'web/index.prod.html',
-            favicon: 'web/favicon.png',
+            favicon: 'web/favicon.ico',
             inject: 'body',
         }),
         new webpack.optimize.UglifyJsPlugin({

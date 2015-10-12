@@ -19,7 +19,7 @@
     "team"
   ],
   "author": "",
-  "license": "BSD",
+  "license": "BSD-3-Clause",
   "dependencies": {
     "autoprefixer": "^6.0.3",
     "axios": "^0.7.0",
