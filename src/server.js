@@ -5,7 +5,6 @@ var url = require('url');
 var express = require('express');
 var webpack = require('webpack');
 var config = require('../webpack.config.dev');
-var proxy = require('express-http-proxy');
 
 var app = express();
 var compiler = webpack(config);
@@ -27,14 +26,6 @@ app.get('/api/tussi', function(req, res, next) {
     ]);
 
 });
-
-/*
-app.use('/api', proxy('http://localhost:8765', {
-  forwardPath: function(req, res) {
-    return '/api' + require('url').parse(req.url).path;
-  }
-}));
-*/
 
 app.get('*', function(req, res, next) {
   res.sendFile(path.join(__dirname, '/../web/index.dev.html'));

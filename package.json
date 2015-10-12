@@ -36,7 +36,6 @@
     "eslint-loader": "^1.1.0",
     "eslint-plugin-react": "^3.5.1",
     "express": "^4.13.3",
-    "express-http-proxy": "^0.6.0",
     "fbjs": "^0.3.1",
     "file-loader": "^0.8.4",
     "html-webpack-plugin": "^1.6.2",
