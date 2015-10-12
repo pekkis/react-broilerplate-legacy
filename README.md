@@ -1,5 +1,4 @@
-NOT FUCKING GONNA MAINTAIN THIS. ONE TIME THING FOR
+An application Bootstrap
+=========================
 
-- Limis
-- Panu
-- Redux Sauna
+Use as you like, but read the license from LICENSE.
