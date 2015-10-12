@@ -1,0 +1,6 @@
+/.idea
+/vendor
+node_modules/
+composer.phar
+src/config.js
+dist/*
