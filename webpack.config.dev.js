@@ -21,17 +21,8 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.less$/,
-                loaders: [
-                    'style-loader',
-                    'css-loader',
-                    'autoprefixer-loader?browsers=last 2 version',
-                    'less-loader'
-                ]
-            },
-            {
                 test: /\.css$/,
-                loader: 'style-loader!css-loader'
+                loader: 'style-loader!css-loader!postcss-loader'
             },
             {
                 test: /\.(jpe?g|png|gif)$/i,
@@ -40,7 +31,6 @@ module.exports = {
                     'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
                 ]
             },
-
             {
                 test: /\.(woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=assets/fonts/[name].[ext]'
@@ -51,6 +41,17 @@ module.exports = {
             }
         ]
     },
+    postcss: function () {
+        return [
+            require('autoprefixer')(
+                {
+                    browsers: ['last 2 versions']
+                }
+            ),
+            require('postcss-nested'),
+            require('postcss-simple-vars'),
+        ];
+    },
     resolve: {
         modulesDirectories: ['node_modules', 'bower_components'],
         extensions: ['', '.js', '.jsx']
@@ -60,7 +61,7 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
         new HtmlWebpackPlugin({
-            title: 'Pekkis Goes To Movies',
+            title: 'JavaScript SchamaScript',
             template: 'web/index.dev.html',
             favicon: 'web/favicon.png'
         }),

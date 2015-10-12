@@ -1,4 +1,4 @@
-require('./client.less');
+require('./client.css');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
