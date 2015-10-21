@@ -4,6 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
+import { Router, Route, Link } from 'react-router';
+
 function getTussit() {
     return axios.get('/api/tussi').then((response) => {
         return response.data;
@@ -14,7 +16,9 @@ const HelloWorld = React.createClass({
     render: function() {
         return (
             <div>
-                Hello {this.props.name}
+                <Link to={`/hello/${this.props.name}`}>
+                    Hello {this.props.name}
+                </Link>
             </div>
         );
     }
@@ -44,13 +48,17 @@ const HelloWorldApp = React.createClass({
             <div>
                 <h1>Lusso</h1>
 
-                {names.map(name => <HelloWorld name={name}/>)}
+                {names.map((name, i) =>
+                    <HelloWorld key={i} name={name}/>
+                )}
 
                 <Counterizer
                     {...this.state}
                     onIncrementCounter={this.incrementCounter}/>
 
                 <Counter count={this.state.count}/>
+
+                {this.props.children}
             </div>
         );
     },
@@ -94,7 +102,27 @@ class Counter extends React.Component {
     }
 };
 
+const Greeter = React.createClass({
+    render: function() {
+        const { name } = this.props.params;
+
+        return (
+            <h2>
+                Helloooo {name}
+            </h2>
+        );
+    }
+});
+
+const routes = (
+    <Router>
+        <Route path="/" component={HelloWorldApp}>
+            <Route path="/hello/:name" component={Greeter}></Route>
+        </Route>
+    </Router>
+);
+
 ReactDOM.render(
-    <HelloWorldApp/>,
+    routes,
     document.getElementById('app')
 );
