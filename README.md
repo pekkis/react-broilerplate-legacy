@@ -25,3 +25,5 @@ Instructions
 - npm run start
 - open browser and go to http://localhost:8888
 - kood kood!
+- open Sublime with the command subl .
+ (just type it in the project folder)
