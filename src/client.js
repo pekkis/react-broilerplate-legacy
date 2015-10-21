@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
-import { Router, Route, Link } from 'react-router';
+import { Router, Route, Link, IndexRoute } from 'react-router';
 
 function getTussit() {
     return axios.get('/api/tussi').then((response) => {
@@ -25,6 +25,7 @@ const HelloWorld = React.createClass({
 });
 
 const HelloWorldApp = React.createClass({
+
     getInitialState: function() {
         return {
             count: 0,
@@ -48,17 +49,14 @@ const HelloWorldApp = React.createClass({
             <div>
                 <h1>Lusso</h1>
 
-                {names.map((name, i) =>
-                    <HelloWorld key={i} name={name}/>
+                {this.props.children && React.cloneElement(
+                    this.props.children,
+                    {
+                        names: this.state.names,
+                        count: this.state.count,
+                        onIncrementCounter: this.incrementCounter
+                    }
                 )}
-
-                <Counterizer
-                    {...this.state}
-                    onIncrementCounter={this.incrementCounter}/>
-
-                <Counter count={this.state.count}/>
-
-                {this.props.children}
             </div>
         );
     },
@@ -73,10 +71,6 @@ const HelloWorldApp = React.createClass({
 const Counterizer = React.createClass({
     render: function() {
         const { count, name, onIncrementCounter } = this.props;
-
-        /*const count = this.props.count;
-        const name = this.props.name;
-        const onIncrementCounter = this.props.onIncrementCounter;*/
 
         return (
             <div className="tussi">
@@ -114,9 +108,36 @@ const Greeter = React.createClass({
     }
 });
 
+const Index = React.createClass({
+
+    render: function() {
+
+        const { count, names, onIncrementCounter } = this.props;
+
+        return (
+
+            <div>
+
+                {names.map((name, i) =>
+                    <HelloWorld key={i} name={name}/>
+                )}
+
+                <Counterizer
+                    {...this.props}
+                />
+
+                <Counter count={count}/>
+
+            </div>
+        );
+    }
+
+});
+
 const routes = (
     <Router>
         <Route path="/" component={HelloWorldApp}>
+            <IndexRoute component={Index} />
             <Route path="/hello/:name" component={Greeter}></Route>
         </Route>
     </Router>
