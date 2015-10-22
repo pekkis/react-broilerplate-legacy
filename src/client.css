@@ -1,28 +1,21 @@
 $red: rgba(255, 0, 0, 1);
 
+body {
+    background-color: rgb(0, 0, 0);
+}
+
 h1 {
     color: $red
 }
 
-.tussi {
-    padding: 20px;
+.todo {
 
-    background-color: pink;
+    color: rgba(0, 255, 0, 1);
 
-    button {
-        margin-left: 50px;
+    &.done {
+        color: rgba(255, 0, 0, 1);
+        text-decoration: line-through;
     }
 }
 
-.mega-counter {
-    position: absolute;
-    right: 0;
-    bottom: 80px;
 
-    background-color: cyan;
-    color: pink;
-    padding: 40px 80px;
-
-    font-size: 64px;
-    font-weight: bold;
-}
