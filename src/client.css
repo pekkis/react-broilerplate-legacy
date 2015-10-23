@@ -8,6 +8,15 @@ body {
     font-family: "Comic Sans MS";
 }
 
+form {
+
+    input, textarea {
+        margin: .3rem;
+        width: 100%;
+    }
+
+}
+
 .todo {
 
     &.done {

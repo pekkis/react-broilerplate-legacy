@@ -3,12 +3,12 @@ import Todo from './Todo';
 
 const TodoList = (props) => {
 
-    const { todos } = props;
+    const { todos, markTodo } = props;
 
     return (
         <ul>
             {todos.map(todo =>
-                <Todo key={todo.id} todo={todo} />
+                <Todo markTodo={markTodo} key={todo.id} todo={todo} />
             )}
         </ul>
     );

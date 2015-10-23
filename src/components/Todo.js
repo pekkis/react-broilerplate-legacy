@@ -3,7 +3,7 @@ import classnames from 'classnames';
 
 const Todo = (props) => {
 
-    const { todo } = props;
+    const { todo, markTodo } = props;
 
     const classes = classnames(
         'todo',
@@ -11,8 +11,8 @@ const Todo = (props) => {
     );
 
     return (
-        <li className={classes}>
-            {todo.todo}
+        <li className={classes} onClick={markTodo.bind(null, todo.id)}>
+            <span>{todo.todo}</span>
         </li>
     );
 };
