@@ -6,6 +6,7 @@ class TodoApp extends React.Component {
 
     constructor() {
         super();
+
         this.state = {
             todos: List.of(
                 {
@@ -49,8 +50,16 @@ class TodoApp extends React.Component {
 
     render() {
         const { todos } = this.state;
+
         return (
-            <TodoList todos={todos} />
+
+            <section>
+
+                <h1>To Do</h1>
+
+                <TodoList todos={todos} />
+
+            </section>
         );
     }
 };

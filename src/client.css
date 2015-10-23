@@ -2,15 +2,13 @@ $red: rgba(255, 0, 0, 1);
 
 body {
     background-color: rgb(0, 0, 0);
-}
-
-h1 {
-    color: $red
+    color: rgb(200, 200, 200);
+    font-size: 40px;
+    margin: 1rem;
+    font-family: "Comic Sans MS";
 }
 
 .todo {
-
-    color: rgba(0, 255, 0, 1);
 
     &.done {
         color: rgba(255, 0, 0, 1);
