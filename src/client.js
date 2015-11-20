@@ -16,6 +16,7 @@ const app = (
 let rootElement = app;
 
 if (__DEVELOPMENT__ && __DEVTOOLS__) {
+
     const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
     rootElement = (
         <div>
@@ -28,6 +29,6 @@ if (__DEVELOPMENT__ && __DEVTOOLS__) {
 }
 
 ReactDOM.render(
-    app,
+    rootElement,
     document.getElementById('app')
 );
