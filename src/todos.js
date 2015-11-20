@@ -34,7 +34,7 @@ export default List.of(
     },
     {
         id: uuid.v4(),
-        todo: 'Palauta puutarhanhoitovehkeet 2 vko kuluessa',
+        todo: 'Palauta puutarhanhoitovehkeet 2 vko kuluessa (takuupalautus)',
         done: false,
     }
 );

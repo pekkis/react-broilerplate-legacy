@@ -5,7 +5,6 @@ export default class TodoForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-
         const { addTodo } = this.props;
         addTodo(this.refs.todo.value);
     }
@@ -16,12 +15,8 @@ export default class TodoForm extends React.Component {
 
         return (
             <form onSubmit={::this.handleSubmit}>
-
-                <textarea ref="todo">
-                </textarea>
-
+                <input ref="todo" />
                 <button type="submit">Tallenna</button>
-
             </form>
         );
     }

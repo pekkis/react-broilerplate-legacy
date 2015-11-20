@@ -7,7 +7,9 @@ const Todo = (props) => {
 
     const classes = classnames(
         'todo',
-        { done: todo.done }
+        {
+            done: todo.done,
+        }
     );
 
     return (
