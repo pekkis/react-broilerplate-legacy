@@ -20,14 +20,26 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
+                test: /\.less$/,
+                loaders: [
+                    'style-loader',
+                    'css-loader',
+                    'autoprefixer-loader?browsers=last 2 version',
+                    'less-loader'
+                ]
+            },
+            {
                 test: /\.css$/,
-                loader: 'style-loader!css-loader!postcss-loader'
+                loaders: [
+                    'style-loader',
+                    'css-loader'
+                ]
             },
             {
                 test: /\.(jpe?g|png|gif)$/i,
                 loaders: [
                     'file?hash=sha512&digest=hex&name=assets/images/[hash:base58:8].[ext]',
-                    'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+                    'img?minimize&optimizationLevel=5&progressive=true'
                 ]
             },
             {

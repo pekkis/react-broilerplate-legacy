@@ -3,7 +3,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
 
 module.exports = {
-    devtool: 'eval',
+    devtool: 'cheap-module-source-map',
     entry: [
         'webpack-hot-middleware/client',
         './src/client.js'
@@ -21,14 +21,23 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
+                test: /\.less$/,
+                loaders: [
+                    'style-loader',
+                    'css-loader',
+                    'autoprefixer-loader?browsers=last 2 version',
+                    'less-loader'
+                ]
+            },
+            {
                 test: /\.css$/,
-                loader: 'style-loader!css-loader!postcss-loader'
+                loader: 'style-loader!css-loader'
             },
             {
                 test: /\.(jpe?g|png|gif)$/i,
                 loaders: [
                     'file?hash=sha512&digest=hex&name=assets/images/[hash:base58:8].[ext]',
-                    'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+                    'img?minimize&optimizationLevel=5&progressive=true'
                 ]
             },
             {
@@ -67,7 +76,7 @@ module.exports = {
         }),
         new webpack.DefinePlugin({
             __DEVELOPMENT__: process.env.NODE_ENV === 'development',
-            __DEVTOOLS__: true
+            __DEVTOOLS__: false
         }),
     ]
 };
