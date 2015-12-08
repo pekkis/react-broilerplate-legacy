@@ -63,10 +63,7 @@ export default class TodoApp extends React.Component {
         });
     }
 
-
     addTodo(todo) {
-
-
         this.setState({
             todos: this.state.todos.push(todo)
         });

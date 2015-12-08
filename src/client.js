@@ -1,12 +1,18 @@
 import './client.less';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import store from './store';
 import TodoApp from './components/TodoApp';
+import { Provider } from 'react-redux';
+
+const app = (
+    <Provider store={store}>
+        <TodoApp />
+    </Provider>
+);
 
 ReactDOM.render(
-    <TodoApp />,
+    app,
     document.getElementById('app')
 );
 
