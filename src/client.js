@@ -2,7 +2,7 @@ import './client.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import store from './store';
-import TodoApp from './components/TodoApp';
+import TodoApp from './components/smart/TodoAppContainer';
 import { Provider } from 'react-redux';
 
 const app = (

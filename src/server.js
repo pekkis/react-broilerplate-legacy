@@ -1,10 +1,14 @@
 var port = 8888;
 
+import uuid from 'node-uuid';
+import { List } from 'immutable';
+
 var path = require('path');
 var url = require('url');
 var express = require('express');
 var webpack = require('webpack');
 var config = require('../webpack.config.dev');
+var bodyParser = require('body-parser')
 
 var app = express();
 var compiler = webpack(config);
@@ -14,17 +18,51 @@ app.use(require('webpack-dev-middleware')(compiler, {
   publicPath: config.output.publicPath
 }));
 
+app.use(bodyParser.json())
+
+let todos = List.of(
+    {
+        id: uuid.v4(),
+        text: 'Get 100 litres of battery acid',
+        done: true,
+    },
+    {
+        id: uuid.v4(),
+        text: 'Get gardening tools',
+        done: true,
+    },
+    {
+        id: uuid.v4(),
+        text: 'Carve up the "meat"',
+        done: false,
+    },
+    {
+        id: uuid.v4(),
+        text: 'Liquidate the pieces',
+        done: false,
+    },
+    {
+        id: uuid.v4(),
+        text: 'Dump the acid in the Danube',
+        done: false,
+    }
+);
+
 app.use(require('webpack-hot-middleware')(compiler));
 
-app.get('/api/tussi', function(req, res, next) {
+app.get('/api/todo', function(req, res, next) {
 
-    res.send([
-        'tussi',
-        'tussi2',
-        'tussi3',
-        'tussi4',
-    ]);
+    setTimeout(
+        function() {
+            res.send(todos.toJS());
+        },
+        Math.random() * 3
+    );
+});
 
+app.post('/api/todo', function(req, res, next) {
+    todos = List(req.body);
+    res.send(['ok']);
 });
 
 app.get('*', function(req, res, next) {
@@ -40,5 +78,4 @@ app.listen(port, 'localhost', function(err) {
 
   console.log('Listening at http://localhost:' + port);
 });
-
 

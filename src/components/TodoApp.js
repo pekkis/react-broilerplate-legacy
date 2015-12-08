@@ -1,72 +1,33 @@
 import React from 'react';
-import todos from '../todos';
 import TodoList from './TodoList';
 import { List } from 'immutable';
 import TodoForm from './TodoForm';
 
-export default class TodoApp extends React.Component {
+import axios from 'axios';
 
-    constructor() {
-        super();
-        this.state = {
-            todos: List()
-        };
-    }
+export default class TodoApp extends React.Component {
 
     render() {
 
-        const { todos } = this.state;
+        const { todos, addTodo, toggleTodo, removeTodo, saveTodos, isChanged } = this.props;
 
         return (
             <div>
                 <TodoList
-                    onToggle={this.toggleTodo.bind(this)}
-                    onRemove={this.removeTodo.bind(this)}
+                    onToggle={toggleTodo}
+                    onRemove={removeTodo}
                     todos={todos.sortBy(todo => todo.text).sortBy(todo => todo.done)}
                 />
-                <TodoForm onAdd={this.addTodo.bind(this)} />
+                <TodoForm onAdd={addTodo} />
+
+                <button onClick={saveTodos.bind(null, todos)} disabled={!isChanged}>Save</button>
+
             </div>
         );
     }
 
     componentDidMount() {
-
-        setTimeout(() => {
-            this.setState({
-                todos: todos
-            });
-        }, 500);
-
+        const { receiveTodos } = this.props;
+        receiveTodos();
     }
-
-    removeTodo(id) {
-        const { todos } = this.state;
-        this.setState({
-            todos: todos.remove(
-                todos.findIndex(t => t.id === id)
-            )
-        });
-    }
-
-    toggleTodo(id) {
-        const { todos } = this.state;
-        this.setState({
-            todos: todos.update(
-                todos.findIndex(t => t.id === id),
-                todo => {
-                    return {
-                        ...todo,
-                        done: !todo.done
-                    };
-                }
-            )
-        });
-    }
-
-    addTodo(todo) {
-        this.setState({
-            todos: this.state.todos.push(todo)
-        });
-    }
-
 }
