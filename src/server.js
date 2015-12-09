@@ -25,26 +25,31 @@ let todos = List.of(
         id: uuid.v4(),
         text: 'Get 100 litres of battery acid',
         done: true,
+        category: 0
     },
     {
         id: uuid.v4(),
         text: 'Get gardening tools',
         done: true,
+        category: 0
     },
     {
         id: uuid.v4(),
         text: 'Carve up the "meat"',
         done: false,
+        category: 0
     },
     {
         id: uuid.v4(),
         text: 'Liquidate the pieces',
         done: false,
+        category: 0
     },
     {
         id: uuid.v4(),
         text: 'Dump the acid in the Danube',
         done: false,
+        category: 1
     }
 );
 

@@ -1,12 +1,13 @@
 import axios from 'axios';
 import { List } from 'immutable';
-import todoService from '../services/todo-localstorage';
+import todoService from '../services/todo-localhost';
 
 export const ADD_TODO = 'ADD_TODO';
 export const TOGGLE_TODO = 'TOGGLE_TODO';
 export const REMOVE_TODO = 'REMOVE_TODO';
 export const RECEIVE_TODOS = 'RECEIVE_TODOS';
 export const SAVE_TODOS = 'SAVE_TODOS';
+export const MOVE_TODO = 'MOVE_TODO';
 
 export function addTodo(todo) {
     return {
@@ -28,6 +29,19 @@ export function removeTodo(id) {
         payload: id
     };
 }
+
+export function moveTodo(id, direction) {
+
+    return {
+        type: MOVE_TODO,
+        payload: {
+            id: id,
+            direction: direction
+        }
+    };
+}
+
+
 
 export function receiveTodos() {
 

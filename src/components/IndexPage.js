@@ -1,20 +1,16 @@
 import React from 'react';
-import TodoList from './TodoList';
 import TodoForm from './TodoForm';
+import TodoLists from './TodoLists';
 
 const IndexPage = props => {
 
-    const { todos, addTodo, toggleTodo, removeTodo, saveTodos, isChanged } = props;
+    const { saveTodos, addTodo, isChanged, todos, toggleTodo, removeTodo, moveTodo } = props;
 
     return (
 
         <section>
+            <TodoLists todos={todos} onToggle={toggleTodo} onRemove={removeTodo} onMove={moveTodo} />
 
-            <TodoList
-                onToggle={toggleTodo}
-                onRemove={removeTodo}
-                todos={todos.sortBy(todo => todo.text).sortBy(todo => todo.done)}
-            />
             <TodoForm onAdd={addTodo} />
 
             <button onClick={saveTodos.bind(null, todos)} disabled={!isChanged}>Save</button>

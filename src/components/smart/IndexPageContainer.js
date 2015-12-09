@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import IndexPage from '../IndexPage';
-import { addTodo, removeTodo, toggleTodo, receiveTodos, saveTodos } from '../../actions/todo-actions';
+import { addTodo, removeTodo, toggleTodo, receiveTodos, saveTodos, moveTodo } from '../../actions/todo-actions';
 
 function mapStateToProps(state) {
     return {
@@ -15,6 +15,7 @@ function mapDispatchToProps(dispatch) {
         removeTodo: id => dispatch(removeTodo(id)),
         toggleTodo: id => dispatch(toggleTodo(id)),
         saveTodos: todos => dispatch(saveTodos(todos)),
+        moveTodo: (id, direction) => dispatch(moveTodo(id, direction)),
     };
 }
 

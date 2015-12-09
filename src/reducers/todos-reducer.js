@@ -1,6 +1,14 @@
 import { List, Map } from 'immutable';
 import uuid from 'node-uuid';
-import { ADD_TODO, REMOVE_TODO, TOGGLE_TODO, RECEIVE_TODOS, SAVE_TODOS } from '../actions/todo-actions';
+
+import {
+    ADD_TODO,
+    REMOVE_TODO,
+    TOGGLE_TODO,
+    RECEIVE_TODOS,
+    SAVE_TODOS,
+    MOVE_TODO
+} from '../actions/todo-actions';
 
 const defaultState = Map({
     todos: List(),
@@ -48,6 +56,20 @@ export default function(state = defaultState, action) {
 
         case SAVE_TODOS:
             return state.set('isChanged', false);
+
+        case MOVE_TODO:
+            return state
+                .updateIn(
+                    [
+                        'todos',
+                        state.get('todos').findIndex(t => t.id === action.payload.id)
+                    ], todo => ({
+                        ...todo,
+                        category: todo.category + action.payload.direction
+                    })
+                )
+                .set('isChanged', true);
+            break;
 
         default:
             return state;

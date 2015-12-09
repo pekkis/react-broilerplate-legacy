@@ -20,7 +20,8 @@ export default class TodoForm extends React.Component {
         const newTodo = {
             id: uuid.v4(),
             text: this.refs.text.value,
-            done: false
+            done: false,
+            category: 0,
         };
 
         this.refs.text.value = '';

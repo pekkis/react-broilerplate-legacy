@@ -8,10 +8,11 @@ import IndexPage from './components/smart/IndexPageContainer';
 import TodoPage from './components/smart/TodoPageContainer';
 
 import { Router, Route, IndexRoute } from 'react-router';
+import { createHistory } from 'history';
 
 const app = (
     <Provider store={store}>
-        <Router>
+        <Router history={createHistory()}>
             <Route path="/" component={TodoApp}>
                 <IndexRoute component={IndexPage}/>
                 <Route path="todo/:uuid" component={TodoPage}/>
