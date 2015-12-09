@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { List } from 'immutable';
+import todoService from '../services/todo-localstorage';
 
 export const ADD_TODO = 'ADD_TODO';
 export const TOGGLE_TODO = 'TOGGLE_TODO';
@@ -32,14 +33,12 @@ export function receiveTodos() {
 
     return function(dispatch) {
 
-        axios.get('/api/todo')
-            .then(response => response.data)
-            .then(todos => {
-                dispatch({
-                    type: RECEIVE_TODOS,
-                    payload: List(todos)
-                });
+        todoService.get().then(todos => {
+            dispatch({
+                type: RECEIVE_TODOS,
+                payload: List(todos)
             });
+        });
     };
 
 }
@@ -50,12 +49,12 @@ export function saveTodos(todos) {
 
     return function(dispatch) {
 
-        axios.post('/api/todo', todos)
-            .then(response => {
-                dispatch({
-                    type: SAVE_TODOS
-                });
+        todoService.save(todos).then(() => {
+            dispatch({
+                type: SAVE_TODOS
             });
+        });
+
     };
 
 }
