@@ -4,18 +4,13 @@ import { addTodo, removeTodo, toggleTodo, receiveTodos, saveTodos } from '../../
 
 function mapStateToProps(state) {
     return {
-        todos: state.get('todos'),
-        isChanged: state.get('isChanged'),
-    }
+
+    };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        addTodo: todo => dispatch(addTodo(todo)),
-        removeTodo: id => dispatch(removeTodo(id)),
-        toggleTodo: id => dispatch(toggleTodo(id)),
-        receiveTodos: () => dispatch(receiveTodos()),
-        saveTodos: todos => dispatch(saveTodos(todos)),
+        receiveTodos: () => dispatch(receiveTodos())
     };
 }
 

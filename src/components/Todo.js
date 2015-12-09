@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import { Link } from 'react-router';
 
 const Todo = props => {
 
@@ -14,7 +15,10 @@ const Todo = props => {
 
     return (
         <li className={classes}>
-            <span onClick={onToggle.bind(null, todo.id)}>{todo.text}</span>
+
+            <Link to={`/todo/${todo.id}`}>{todo.text}</Link>
+
+            <button onClick={onToggle.bind(null, todo.id)}>Toggle</button>
             <button onClick={onRemove.bind(null, todo.id)}>Remove</button>
         </li>
     );
