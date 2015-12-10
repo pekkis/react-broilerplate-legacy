@@ -34,12 +34,12 @@ let sensors = Map({
         name: "Basement",
         measurements: List.of(
             {
-                value: 79.0,
+                value: 75.01,
                 unit: '%',
                 timestamp: moment('1980-01-01')
             },
             {
-                value: 79.0,
+                value: 75.03,
                 unit: '%',
                 timestamp: moment('2000-01-01')
             }
