@@ -31,7 +31,13 @@ export default {
         return axios
             .get('/api/measurement')
             .then(response => {
-                return List();
+                return List(response.data)
+                    .map(measurement => {
+                        return {
+                            ...measurement,
+                            timestamp: moment(measurement.timestamp)
+                        };
+                    });
             });
     }
 };

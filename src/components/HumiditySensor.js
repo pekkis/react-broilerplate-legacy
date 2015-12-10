@@ -20,6 +20,8 @@ const HumiditySensor = props => {
                 Current humidity: <Measurement value={current.value} unit={current.unit} />
             </div>
 
+            <em>Number of measurements: {measurements.count()}</em>
+
         </section>
     );
 }

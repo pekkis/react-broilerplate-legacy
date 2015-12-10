@@ -4,6 +4,9 @@ import uuid from 'node-uuid';
 import { List } from 'immutable';
 import moment from 'moment';
 
+import Random from "random-js";
+const r = new Random(Random.engines.mt19937().autoSeed());
+
 var path = require('path');
 var url = require('url');
 var express = require('express');
@@ -24,15 +27,47 @@ app.use(bodyParser.json())
 let sensors = List.of(
     {
         id: uuid.v4(),
-        name: "Humidity sensor in Jarmo's basement",
+        name: "Jarmo's basement",
         measurements: List.of(
             {
-                value: 50.5,
+                value: 79.0,
                 unit: '%',
                 timestamp: moment('2015-01-01')
             },
             {
-                value: 100,
+                value: 79.0,
+                unit: '%',
+                timestamp: moment()
+            }
+        )
+    },
+    {
+        id: uuid.v4(),
+        name: "Walma's room",
+        measurements: List.of(
+            {
+                value: 35,
+                unit: '%',
+                timestamp: moment('2015-01-01')
+            },
+            {
+                value: 15,
+                unit: '%',
+                timestamp: moment()
+            }
+        )
+    },
+    {
+        id: uuid.v4(),
+        name: "Library",
+        measurements: List.of(
+            {
+                value: 50,
+                unit: '%',
+                timestamp: moment('2015-01-01')
+            },
+            {
+                value: 49.4,
                 unit: '%',
                 timestamp: moment()
             }
@@ -40,15 +75,55 @@ let sensors = List.of(
     }
 );
 
+
+let measurements = List();
+
+function generateMeasurement() {
+
+    const ids = sensors.map(sensor => sensor.id).toJS();
+
+    const id = r.pick(ids);
+
+    const latestMeasurement = sensors
+        .find(s => s.id === id)
+        .measurements
+        .sort(m => m.timestamp)
+        .first();
+
+    const newMeasurement = {
+        id: id,
+        value: latestMeasurement.value + 1,
+        unit: latestMeasurement.unit,
+        timestamp: moment()
+    };
+
+    sensors = sensors.update(
+        sensors.findIndex(s => s.id === id),
+        sensor => {
+            console.log(sensor, 'found this sensor');
+            sensor.measurements = sensor.measurements.push(newMeasurement);
+            return {
+                ...sensor
+            };
+        }
+    );
+
+    measurements = measurements.push(newMeasurement);
+
+}
+
+setInterval(generateMeasurement, 5000);
+
 app.use(require('webpack-hot-middleware')(compiler));
 
 app.get('/api/sensor', function(req, res, next) {
     res.send(sensors);
 });
 
-app.post('/api/todo', function(req, res, next) {
-    todos = List(req.body);
-    res.send(['ok']);
+app.get('/api/measurement', function(req, res, next) {
+
+    res.send(measurements);
+    measurements = List();
 });
 
 app.get('*', function(req, res, next) {

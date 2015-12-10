@@ -10,20 +10,28 @@ export function getSensors() {
     return function(dispatch) {
 
         sensorService.getSensors().then(sensors => {
+
             dispatch({
                 type: RECEIVE_SENSORS,
                 payload: sensors
             });
+
+            // Kludge!!!
+            setInterval(function() {
+                dispatch(pollMeasurements());
+            }, 500);
+
+
         });
     };
 
 }
 
-export function receiveMeasurements() {
+export function pollMeasurements() {
 
     return function(dispatch) {
 
-        todoService.pollMeasurements()
+        sensorService.pollMeasurements()
             .then(measurements => {
                 dispatch({
                     type: RECEIVE_MEASUREMENTS,
