@@ -2,6 +2,7 @@ var port = 8888;
 
 import uuid from 'node-uuid';
 import { List } from 'immutable';
+import moment from 'moment';
 
 var path = require('path');
 var url = require('url');
@@ -20,49 +21,29 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(bodyParser.json())
 
-let todos = List.of(
+let sensors = List.of(
     {
         id: uuid.v4(),
-        text: 'Get 100 litres of battery acid',
-        done: true,
-        category: 0
-    },
-    {
-        id: uuid.v4(),
-        text: 'Get gardening tools',
-        done: true,
-        category: 0
-    },
-    {
-        id: uuid.v4(),
-        text: 'Carve up the "meat"',
-        done: false,
-        category: 0
-    },
-    {
-        id: uuid.v4(),
-        text: 'Liquidate the pieces',
-        done: false,
-        category: 0
-    },
-    {
-        id: uuid.v4(),
-        text: 'Dump the acid in the Danube',
-        done: false,
-        category: 1
+        name: "Humidity sensor in Jarmo's basement",
+        measurements: List.of(
+            {
+                value: 50.5,
+                unit: '%',
+                timestamp: moment('2015-01-01')
+            },
+            {
+                value: 100,
+                unit: '%',
+                timestamp: moment()
+            }
+        )
     }
 );
 
 app.use(require('webpack-hot-middleware')(compiler));
 
-app.get('/api/todo', function(req, res, next) {
-
-    setTimeout(
-        function() {
-            res.send(todos.toJS());
-        },
-        Math.random() * 3
-    );
+app.get('/api/sensor', function(req, res, next) {
+    res.send(sensors);
 });
 
 app.post('/api/todo', function(req, res, next) {

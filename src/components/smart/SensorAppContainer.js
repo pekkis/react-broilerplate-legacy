@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import TodoApp from '../TodoApp';
-import { addTodo, removeTodo, toggleTodo, receiveTodos, saveTodos } from '../../actions/todo-actions';
+import SensorApp from '../SensorApp';
+import { getSensors } from '../../actions/sensor-actions';
 
 function mapStateToProps(state) {
     return {
@@ -10,11 +10,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        receiveTodos: () => dispatch(receiveTodos())
+        getSensors: () => dispatch(getSensors())
     };
 }
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(TodoApp);
+)(SensorApp);

@@ -1,21 +1,16 @@
 import { connect } from 'react-redux';
 import IndexPage from '../IndexPage';
-import { addTodo, removeTodo, toggleTodo, receiveTodos, saveTodos, moveTodo } from '../../actions/todo-actions';
+import { pollMeasurements } from '../../actions/sensor-actions';
 
 function mapStateToProps(state) {
     return {
-        todos: state.todo.get('todos'),
-        isChanged: state.todo.get('isChanged'),
+        sensors: state.sensor.get('sensors')
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        addTodo: todo => dispatch(addTodo(todo)),
-        removeTodo: id => dispatch(removeTodo(id)),
-        toggleTodo: id => dispatch(toggleTodo(id)),
-        saveTodos: todos => dispatch(saveTodos(todos)),
-        moveTodo: (id, direction) => dispatch(moveTodo(id, direction)),
+        pollMeasurements: todo => dispatch(pollMeasurements()),
     };
 }
 

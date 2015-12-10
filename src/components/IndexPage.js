@@ -1,19 +1,22 @@
 import React from 'react';
-import TodoForm from './TodoForm';
-import TodoLists from './TodoLists';
+import Measurement from './Measurement';
+import HumiditySensor from './HumiditySensor';
+
+import uuid from 'node-uuid';
+import moment from 'moment';
+import { List } from 'immutable';
+
 
 const IndexPage = props => {
 
-    const { saveTodos, addTodo, isChanged, todos, toggleTodo, removeTodo, moveTodo } = props;
+    const { sensors } = props;
 
     return (
 
         <section>
-            <TodoLists todos={todos} onToggle={toggleTodo} onRemove={removeTodo} onMove={moveTodo} />
-
-            <TodoForm onAdd={addTodo} />
-
-            <button onClick={saveTodos.bind(null, todos)} disabled={!isChanged}>Save</button>
+            {sensors.map(sensor =>
+                <HumiditySensor key={sensor.id} data={sensor} />
+            )}
         </section>
     );
 };
