@@ -5,6 +5,13 @@ import moment from 'moment';
 
 export default {
 
+    notify: id => {
+
+        return axios
+            .post('/api/notify/' + id)
+            .then(true);
+    },
+
     getSensors: () => {
 
         return axios

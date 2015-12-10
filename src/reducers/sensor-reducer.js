@@ -4,7 +4,8 @@ import moment from 'moment';
 import {
     RECEIVE_SENSORS,
     RECEIVE_MEASUREMENTS,
-    CLEAR_ALERT
+    CLEAR_ALERT,
+    NOTIFY_ALERT
 } from '../actions/sensor-actions';
 
 const defaultState = Map({
@@ -19,7 +20,7 @@ const handleAlerts = function(state) {
     }).filterNot(s => {
         const found = state.get('alerts').get(s.id, false);
         if (found) {
-            return (found.timestamp.unix() >= (moment().unix() - 60));
+            return (found.timestamp.unix() >= (moment().unix() - 120));
         }
         return false;
     });
@@ -31,7 +32,8 @@ const handleAlerts = function(state) {
                 id: sensor.id,
                 timestamp: moment(),
                 text: 'High humidity',
-                status: 'active'
+                status: 'active',
+                notified: false
             })
         );
     });
@@ -49,6 +51,13 @@ export default function(state = defaultState, action) {
             return state.updateIn(
                 ['alerts', action.payload],
                 alert => ({...alert, status: 'resolved', timestamp: moment()})
+            );
+            break;
+
+        case NOTIFY_ALERT:
+            return state.updateIn(
+                ['alerts', action.payload],
+                alert => ({...alert, notified: true})
             );
             break;
 

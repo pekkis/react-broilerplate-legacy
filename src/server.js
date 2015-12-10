@@ -3,23 +3,27 @@ var port = 8888;
 import uuid from 'node-uuid';
 import { List, Map } from 'immutable';
 import moment from 'moment';
+import config from './config';
 
 import Random from "random-js";
+
+const messagebird = require('messagebird')(config.apiKey);
+
 const r = new Random(Random.engines.mt19937().autoSeed());
 
 var path = require('path');
 var url = require('url');
 var express = require('express');
 var webpack = require('webpack');
-var config = require('../webpack.config.dev');
+var _config = require('../webpack.config.dev');
 var bodyParser = require('body-parser')
 
 var app = express();
-var compiler = webpack(config);
+var compiler = webpack(_config);
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
-  publicPath: config.output.publicPath
+  publicPath: _config.output.publicPath
 }));
 
 app.use(bodyParser.json())
@@ -100,7 +104,6 @@ function generateMeasurement() {
     sensors = sensors.update(
         id,
         sensor => {
-            console.log(sensor, 'found this sensor');
             sensor.measurements = sensor.measurements.push(newMeasurement);
             return {
                 ...sensor
@@ -124,6 +127,31 @@ app.get('/api/measurement', function(req, res, next) {
 
     res.send(measurements);
     measurements = List();
+});
+
+app.post('/api/notify/:id', function(req, res, next) {
+
+    res.send('ok');
+    if (!config.send) {
+        return;
+    }
+
+    const sensor = sensors.get(req.params.id);
+    const params = {
+        'originator': 'Humidor',
+        'recipients': [
+            config.tel
+        ],
+        'body': sensor.name + ' says: "I am too humid!"'
+    };
+
+    messagebird.messages.create(params, function (err, response) {
+        if (err) {
+        return console.log(err);
+        }
+        console.log(response);
+    });
+
 });
 
 app.get('*', function(req, res, next) {

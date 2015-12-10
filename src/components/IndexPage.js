@@ -9,9 +9,11 @@ import { List } from 'immutable';
 
 const IndexPage = props => {
 
-    const { sensors, alerts, clearAlert } = props;
+    const { sensors, alerts, clearAlert, notifyAlert } = props;
 
-    console.log(alerts.toJS());
+    alerts.filterNot(a => a.notified).forEach(a => {
+        notifyAlert(a.id);
+    });
 
     return (
 

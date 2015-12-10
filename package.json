@@ -46,6 +46,7 @@
     "immutable": "^3.7.5",
     "less": "^2.5.3",
     "less-loader": "^2.2.2",
+    "messagebird": "^2.0.0",
     "moment": "^2.10.6",
     "node-uuid": "^1.4.7",
     "normalize.css": "^3.0.3",
