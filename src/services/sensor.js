@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { default as Immutable, List } from 'immutable';
+import { default as Immutable, List, Map } from 'immutable';
 import moment from 'moment';
 
 export default {
@@ -11,7 +11,7 @@ export default {
             .get('/api/sensor')
             .then(response => response.data)
             .then(raw => {
-                const sensors = List(raw)
+                const sensors = Map(raw)
                     .map(sensor => {
                         return {
                             ...sensor,

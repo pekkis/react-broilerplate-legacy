@@ -71,9 +71,9 @@ module.exports = {
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.NoErrorsPlugin(),
         new HtmlWebpackPlugin({
-            title: 'Pekkis Goes To Movies',
+            title: 'Tieto Humidor',
             template: 'web/index.prod.html',
-            favicon: 'web/favicon.ico',
+            favicon: 'web/favicon.png',
             inject: 'body',
         }),
         new webpack.optimize.UglifyJsPlugin({

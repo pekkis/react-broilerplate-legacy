@@ -1,16 +1,18 @@
 import { connect } from 'react-redux';
 import IndexPage from '../IndexPage';
-import { pollMeasurements } from '../../actions/sensor-actions';
+import { pollMeasurements, clearAlert } from '../../actions/sensor-actions';
 
 function mapStateToProps(state) {
     return {
-        sensors: state.sensor.get('sensors')
-    }
+        sensors: state.sensor.get('sensors'),
+        alerts: state.sensor.get('alerts')
+    };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        pollMeasurements: todo => dispatch(pollMeasurements()),
+        pollMeasurements: () => dispatch(pollMeasurements()),
+        clearAlert: id => dispatch(clearAlert(id)),
     };
 }
 

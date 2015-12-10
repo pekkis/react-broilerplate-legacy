@@ -1,26 +1,29 @@
 import React from 'react';
 import Measurement from './Measurement';
+import Alert from './Alert';
+import cx from 'classnames';
 
 const HumiditySensor = props => {
 
-    const { data } = props;
-
-    console.log(props);
+    const { data, alert, clearAlert } = props;
 
     const measurements = data.measurements.sort(m => m.timestamp);
     const current = measurements.first();
 
+    const classes = cx(
+        'sensor',
+        'humidity',
+    );
 
     return (
-        <section className="sensor humidity">
-
-            <h1>{data.name}</h1>
+        <section className={classes}>
 
             <div>
-                Current humidity: <Measurement value={current.value} unit={current.unit} />
+                <h1>{data.name}</h1>
+                <Measurement value={current.value} unit={current.unit} />
             </div>
 
-            <em>Number of measurements: {measurements.count()}</em>
+            {alert && <Alert clearAlert={clearAlert} alert={alert} />}
 
         </section>
     );

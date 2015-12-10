@@ -1,19 +1,71 @@
 @font-size: 25px;
 
+html {
+    font-size: 25px;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    background-color: rgb(200, 200, 255);
+    background-color: rgb(225, 225, 225);
     color: rgb(33, 33, 33);
     font-size: @font-size;
-    padding: 2rem;
+    padding: 1rem;
     font-family: Lato, sans-serif;
+    min-width: 480px;
+}
+
+h1 {
+    font-size: 40px;
+    img {
+        height: 60px;
+        vertical-align: middle;
+    }
 }
 
 .sensor {
     border: 1px solid rgb(0, 0, 0);
     background-color: rgb(255, 255, 255);
-    padding: 1rem;
     border-radius: 10px;
 
+    display: flex;
+    justify-content: space-between;
+
+
     margin: 1rem;
+
+    h1 {
+        margin: 0 0 1rem 0;
+        font-size: 30px;
+    }
+
+    > div {
+        padding: 1rem;
+
+        &:last-child {
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        &.alert {
+
+            font-size: 0.75rem;
+
+            > div {
+                margin-bottom: 0.75rem;
+            }
+
+            background-color: rgb(255, 0, 0);
+            color: rgb(255, 255, 0);
+
+            button {
+                font-family: Lato, sans-serif;
+                font-size: 1em;
+
+            }
+        }
+
+    }
+
 }
 

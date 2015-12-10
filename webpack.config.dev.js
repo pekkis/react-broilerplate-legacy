@@ -70,9 +70,9 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
         new HtmlWebpackPlugin({
-            title: 'JavaScript SchamaScript',
+            title: 'Tieto Humidor',
             template: 'web/index.dev.html',
-            favicon: 'web/favicon.ico'
+            favicon: 'web/favicon.png'
         }),
         new webpack.DefinePlugin({
             __DEVELOPMENT__: process.env.NODE_ENV === 'development',

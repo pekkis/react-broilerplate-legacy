@@ -11,7 +11,7 @@ class Measurement extends React.Component {
         const { value, unit } = this.props;
 
         return(
-            <span>{value} {unit}</span>
+            <span className="measurement">{value} {unit}</span>
         );
     }
 }

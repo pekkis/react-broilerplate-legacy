@@ -1,7 +1,7 @@
 var port = 8888;
 
 import uuid from 'node-uuid';
-import { List } from 'immutable';
+import { List, Map } from 'immutable';
 import moment from 'moment';
 
 import Random from "random-js";
@@ -24,25 +24,25 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(bodyParser.json())
 
-let sensors = List.of(
-    {
-        id: uuid.v4(),
-        name: "Jarmo's basement",
+let sensors = Map({
+    basement: {
+        id: 'basement',
+        name: "Basement",
         measurements: List.of(
             {
                 value: 79.0,
                 unit: '%',
-                timestamp: moment('2015-01-01')
+                timestamp: moment('1980-01-01')
             },
             {
                 value: 79.0,
                 unit: '%',
-                timestamp: moment()
+                timestamp: moment('2000-01-01')
             }
         )
     },
-    {
-        id: uuid.v4(),
+    walma: {
+        id: 'walma',
         name: "Walma's room",
         measurements: List.of(
             {
@@ -57,8 +57,8 @@ let sensors = List.of(
             }
         )
     },
-    {
-        id: uuid.v4(),
+    library: {
+        id: 'library',
         name: "Library",
         measurements: List.of(
             {
@@ -73,19 +73,19 @@ let sensors = List.of(
             }
         )
     }
-);
+});
 
 
 let measurements = List();
 
 function generateMeasurement() {
 
-    const ids = sensors.map(sensor => sensor.id).toJS();
+    const ids = sensors.map(sensor => sensor.id).toList().toJS();
 
     const id = r.pick(ids);
 
     const latestMeasurement = sensors
-        .find(s => s.id === id)
+        .get(id)
         .measurements
         .sort(m => m.timestamp)
         .first();
@@ -98,7 +98,7 @@ function generateMeasurement() {
     };
 
     sensors = sensors.update(
-        sensors.findIndex(s => s.id === id),
+        id,
         sensor => {
             console.log(sensor, 'found this sensor');
             sensor.measurements = sensor.measurements.push(newMeasurement);

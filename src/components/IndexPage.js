@@ -9,14 +9,19 @@ import { List } from 'immutable';
 
 const IndexPage = props => {
 
-    const { sensors } = props;
+    const { sensors, alerts, clearAlert } = props;
+
+    console.log(alerts.toJS());
 
     return (
 
         <section>
-            {sensors.map(sensor =>
-                <HumiditySensor key={sensor.id} data={sensor} />
-            )}
+            {sensors.toList().map(sensor => {
+                const alert = alerts.filter(a => a.status === 'active').get(sensor.id);
+                return (
+                    <HumiditySensor clearAlert={clearAlert} key={sensor.id} data={sensor} alert={alert} />
+                );
+            })}
         </section>
     );
 };

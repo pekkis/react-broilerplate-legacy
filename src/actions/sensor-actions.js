@@ -4,6 +4,7 @@ import sensorService from '../services/sensor';
 
 export const RECEIVE_SENSORS = 'RECEIVE_SENSORS';
 export const RECEIVE_MEASUREMENTS = 'RECEIVE_MEASUREMENTS';
+export const CLEAR_ALERT = 'CLEAR_ALERT';
 
 export function getSensors() {
 
@@ -27,6 +28,14 @@ export function getSensors() {
 
 }
 
+export function clearAlert(id) {
+    return {
+        type: CLEAR_ALERT,
+        payload: id
+    };
+}
+
+
 export function pollMeasurements() {
 
     return function(dispatch) {
@@ -42,4 +51,5 @@ export function pollMeasurements() {
     };
 
 }
+
 
