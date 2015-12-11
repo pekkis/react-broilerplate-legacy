@@ -14,6 +14,7 @@ const defaultState = Map({
 });
 
 const handleAlerts = function(state) {
+
     const needsAlert = state.get('sensors').filter(sensor => {
         const latest = sensor.measurements.sortBy(m => -m.timestamp).first();
         return (latest.value >= 80);
