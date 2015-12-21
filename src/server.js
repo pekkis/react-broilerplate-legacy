@@ -1,24 +1,22 @@
-var port = 8888;
-
 import uuid from 'node-uuid';
 import { List } from 'immutable';
 
-var path = require('path');
-var url = require('url');
-var express = require('express');
-var webpack = require('webpack');
-var config = require('../webpack.config');
-var bodyParser = require('body-parser')
+import express from 'express';
+import webpack from 'webpack';
 
-var app = express();
-var compiler = webpack(config);
+import config from '../webpack.config';
+import bodyParser from 'body-parser';
+
+const app = express();
+const compiler = webpack(config);
+const port = 8888;
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: false,
   publicPath: config.output.publicPath
 }));
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 let todos = List.of(
     {
