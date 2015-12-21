@@ -9,6 +9,7 @@ const PATHS = {
     src: path.join(__dirname, 'src'),
     build: path.join(__dirname, 'dist'),
     modules: path.join(__dirname, 'node_modules'),
+    test: path.join(__dirname, 'test')
 };
 
 const common = {
@@ -18,7 +19,8 @@ const common = {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
                 include: [
-                    PATHS.src
+                    PATHS.src,
+                    PATHS.test
                 ],
                 exclude: [
                     PATHS.modules,

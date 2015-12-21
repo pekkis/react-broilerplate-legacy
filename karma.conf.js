@@ -1,32 +1,35 @@
-var webpack = require('webpack');
-const _config = require('./webpack.config.js');
+var webpackConfig = require('./webpack.config');
+webpackConfig.devtool = 'inline-source-map';
+
+console.log(webpackConfig.module);
+
 
 module.exports = function (config) {
-
   config.set({
-    browsers: [ 'Chrome' ], //run in Chrome
-    singleRun: true, //just run once by default
-    frameworks: [ 'mocha' ], //use the mocha test framework
+    browsers: [ 'PhantomJS' ],
+    singleRun: true,
+    frameworks: [ 'mocha', 'chai', 'sinon', 'sinon-chai' ],
     files: [
-      'tests.webpack.js' //just load this file
+      'tests.webpack.js'
     ],
-    plugins: [ 'karma-chrome-launcher', 'karma-chai', 'karma-mocha',
-      'karma-sourcemap-loader', 'karma-webpack', 'karma-coverage',
-      'karma-mocha-reporter'
+    plugins: [
+      'karma-phantomjs-launcher',
+      'karma-chai',
+      'karma-mocha',
+      'karma-sourcemap-loader',
+      'karma-webpack',
+      'karma-mocha-reporter',
+      'karma-sinon',
+      'karma-sinon-chai'
     ],
     preprocessors: {
-      'tests.webpack.js': [ 'webpack', 'sourcemap' ] //preprocess with webpack and our sourcemap loader
+      'tests.webpack.js': [ 'webpack', 'sourcemap' ]
     },
-    reporters: [ 'mocha', 'coverage' ], //report results in this format
-    webpack: { //kind of a copy of your webpack config
-        _config
-    },
+    reporters: [ 'mocha' ],
+    webpack: webpackConfig,
     webpackServer: {
-      noInfo: true //please don't spam the console when running in karma!
+      noInfo: true
     },
-    coverageReporter: {
-      type: 'html', //produces a html document after code is run
-      dir: 'coverage/' //path to created html doc
-    }
+    autoWatch: true
   });
 };
