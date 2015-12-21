@@ -9,7 +9,6 @@ const Todo = props => {
 
     const { todo, onRemove, onToggle, onMove } = props;
 
-
     const classes = classnames(
         'todo',
         {

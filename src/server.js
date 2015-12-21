@@ -7,14 +7,14 @@ var path = require('path');
 var url = require('url');
 var express = require('express');
 var webpack = require('webpack');
-var config = require('../webpack.config.dev');
+var config = require('../webpack.config');
 var bodyParser = require('body-parser')
 
 var app = express();
 var compiler = webpack(config);
 
 app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: true,
+  noInfo: false,
   publicPath: config.output.publicPath
 }));
 

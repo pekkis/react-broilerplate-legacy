@@ -1,23 +1,22 @@
 {
-  "stage": 0,
+  "presets": ["react", "stage-0", "es2015"],
   "env": {
     "development": {
-      "plugins": ["react-transform"],
-      "extra": {
-        "react-transform": {
-
-            transforms: [
-                {
-                  "transform": "react-transform-hmr",
-                  "imports": ["react"],
-                  "locals": ["module"]
-                }, {
-                  "transform": "react-transform-catch-errors",
-                  "imports": ["react", "redbox-react"]
-                }
-            ]
-        }
-      }
+      "plugins": [
+        ["react-transform", {
+          // must be an array of objects
+          "transforms": [{
+            "transform": "react-transform-hmr",
+            "imports": ["react"],
+            "locals": ["module"]
+          }, {
+            "transform": "react-transform-catch-errors",
+            "imports": ["react", "redbox-react"]
+          }
+          ]
+          // factoryMethods: ["React.createClass", "createClass"]
+        }]
+      ]
     }
   }
 }
