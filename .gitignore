@@ -5,3 +5,4 @@ composer.phar
 src/config.js
 dist/*
 .DS_Store
+coverage/

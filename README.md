@@ -1,18 +1,17 @@
 An application Bootstrap
 =========================
 
-A webpack-based application broilerplate. Hot reloading, postcss, lots of stuff the cool kids like!
+A webpack-based application broilerplate.
 
 Use as you wish, but still read the license from LICENSE.
 
-In master branch, a clean slate which just logs to console.
-
-In "reduxed" branch, a simple application with Redux and React.
+Different branches hold different stuff. Not per se maintaining,
+use as you like.
 
 Requirements
 -------------
 
-- Node.js. Tested with 4.x series.
+- A relatively new Node.js. I'm running 5.x nowadays.
 
 Instructions
 -------------
@@ -21,6 +20,7 @@ Instructions
 - install sublime text 3, package manager and babel package
 - npm -v
 - if your npm is still 2.x: npm -g update npm
+- npm install -g nodemon
 - npm install
 - npm run start
 - open browser and go to http://localhost:8888

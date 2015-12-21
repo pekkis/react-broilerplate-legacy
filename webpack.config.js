@@ -1,9 +1,15 @@
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 const ENV = process.env.NODE_ENV;
+
 const merge = require('merge');
+const PATHS = {
+    src: path.join(__dirname, 'src'),
+    build: path.join(__dirname, 'dist'),
+    modules: path.join(__dirname, 'node_modules'),
+};
 
 const common = {
     module: {
@@ -11,7 +17,12 @@ const common = {
             {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
-                exclude: /node_modules/
+                include: [
+                    PATHS.src
+                ],
+                exclude: [
+                    PATHS.modules,
+                ]
             },
             {
                 test: /\.less$/,
@@ -20,36 +31,66 @@ const common = {
                     'css-loader',
                     'autoprefixer-loader?browsers=last 2 version',
                     'less-loader'
+                ],
+                include: [
+                    PATHS.src,
+                    PATHS.modules
                 ]
             },
             {
                 test: /\.css$/,
-                loader: 'style-loader!css-loader'
+                loader: 'style-loader!css-loader',
+                include: [
+                    PATHS.src,
+                    PATHS.modules
+                ]
             },
             {
                 test: /\.(jpe?g|png|gif)$/i,
                 loaders: [
                     'file?hash=sha512&digest=hex&name=assets/images/[hash:base58:8].[ext]',
                     'img?minimize&optimizationLevel=5&progressive=true'
+                ],
+                include: [
+                    PATHS.src
                 ]
             },
             {
                 test: /\.(woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=assets/fonts/[name].[ext]'
+                loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=assets/fonts/[name].[ext]',
+                include: [
+                    PATHS.src,
+                    PATHS.modules
+                ]
             },
             {
                 test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: 'file-loader?name=assets/fonts/[name].[ext]'
+                loader: 'file-loader?name=assets/fonts/[name].[ext]',
+                include: [
+                    PATHS.src,
+                    PATHS.modules
+                ]
             }
         ]
     },
     resolve: {
-        modulesDirectories: ['node_modules', 'bower_components'],
+        modulesDirectories: ['node_modules'],
         extensions: ['', '.js', '.jsx']
     }
 };
 
 const envs = {
+
+    test: {
+      devtool: 'inline-source-map', //just do inline source maps instead of the default
+      module: {
+        postLoaders: [ { //delays coverage til after tests are run, fixing transpiled source coverage error
+            test: /\.js$/,
+            exclude: /(test|node_modules|bower_components)\//,
+            loader: 'istanbul-instrumenter' } ]
+      }
+    },
+
     development: {
         devtool: 'cheap-module-source-map',
         entry: [
