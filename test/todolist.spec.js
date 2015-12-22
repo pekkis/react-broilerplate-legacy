@@ -1,30 +1,19 @@
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
+import TodoLists from '../src/components/TodoLists';
+import TodoList from '../src/components/TodoList';
+import TodoForm from '../src/components/TodoForm';
 import Todo from '../src/components/Todo';
-import React from 'react/addons';
+import { List, Range } from 'immutable';
+import { wrap } from 'react-stateless-wrapper';
 
-const TestUtils = React.addons.TestUtils;
+const renderer = TestUtils.createRenderer();
 
 var component;
 var spy = sinon.spy();
 
-describe('Given an instance of the Component', () => {
-  describe('when we render the component', () => {
-    before(() => {
-
-      const todo = {
-        id: 'lussussu',
-        text: 'Lussenluu',
-        done: false
-      };
-
-      component = TestUtils.renderIntoDocument(
-        <Todo onToggle={spy} todo={todo} onRemove={spy} onMove={spy} />
-      );
+describe('<TodoList />', () => {
+    it('puuppa', () => {
+        expect(true).to.equal(true);
     });
-    it('should render a paragraph', () => {
-      var paragraph = TestUtils.scryRenderedDOMComponentsWithTag(component, 'p');
-
-      expect(paragraph).to.have.length.above(0, 'Expected to have element with tag <p>');
-      expect(spy).to.be.calledOnce;
-    });
-  });
 });

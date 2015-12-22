@@ -84,13 +84,7 @@ const common = {
 const envs = {
 
     test: {
-      devtool: 'inline-source-map', //just do inline source maps instead of the default
-      module: {
-        postLoaders: [ { //delays coverage til after tests are run, fixing transpiled source coverage error
-            test: /\.js$/,
-            exclude: /(test|node_modules|bower_components)\//,
-            loader: 'istanbul-instrumenter' } ]
-      }
+      devtool: 'inline-source-map' //just do inline source maps instead of the default
     },
 
     development: {
