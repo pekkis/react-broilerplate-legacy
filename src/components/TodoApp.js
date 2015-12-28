@@ -17,7 +17,7 @@ export default class TodoApp extends React.Component {
     }
 
     componentDidMount() {
-        const { receiveTodos } = this.props;
-        receiveTodos();
+        // const { receiveTodos } = this.props;
+        // receiveTodos();
     }
 }

@@ -23,7 +23,7 @@ const compiler = webpack(config);
 const port = 8888;
 
 app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: false,
+  noInfo: true,
   publicPath: config.output.publicPath
 }));
 
@@ -81,6 +81,7 @@ app.post('/api/todo', function(req, res, next) {
 
 app.get('*', function(req, res, next) {
 
+    /*
     const history = createHistory();
     const app = (
         <Provider store={store}>
@@ -95,8 +96,9 @@ app.get('*', function(req, res, next) {
     console.log(content);
 
     res.send(content);
+    */
 
-  // res.sendFile(path.join(__dirname, '/../web/index.dev.html'));
+  res.sendFile(path.join(__dirname, '/../web/index.dev.html'));
 });
 
 

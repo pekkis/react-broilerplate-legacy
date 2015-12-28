@@ -8,7 +8,9 @@ import { Router } from 'react-router';
 
 const history = createHistory();
 
-import routes from './routes';
+import createRoutes from './routes';
+const routes = createRoutes(store);
+
 
 const app = (
     <Provider store={store}>

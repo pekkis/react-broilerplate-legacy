@@ -8,10 +8,12 @@ const routes = createRoutes(store);
 
 import createHistory from 'history/lib/createMemoryHistory';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router';
+import { Router, RoutingContext } from 'react-router';
 
 import webpack from 'webpack';
 
+import createMemoryHistory from 'history/lib/createMemoryHistory';
+import useQueries from 'history/lib/useQueries';
 
 var Webpack_isomorphic_tools = require('webpack-isomorphic-tools')
 
@@ -33,74 +35,62 @@ global.webpack_isomorphic_tools = new Webpack_isomorphic_tools(require('../webpa
 {
   // webpack-isomorphic-tools is all set now.
   // here goes all your web application code:
-  //require('./server')
+  //require('./server'
+
+    const path = '/';
+
+    // Set up history for router:
+    const history = useQueries(createMemoryHistory)();
+    const location = history.createLocation(path);
+
+    match({ routes, location: location }, (error, redirectLocation, renderProps) => {
 
 
-    const history = createHistory();
+        // console.log(error, 'error');
 
-    console.log(history);
+        // console.log(redirectLocation, 'redir');
 
+        // console.log(renderProps, 'renderprops');
 
-    const app = (
-        <Provider store={store}>
-            <Router history={history}>
-                {routes}
-            </Router>
-        </Provider>
-    );
+        const fetchers = renderProps.routes
+            .map(route => route.component)
+            .filter(component => component.fetch)
+            .map(component => component.fetch);
 
-    const content = renderToString(app);
+        console.log(fetchers);
 
-    console.log(content);
+        const params = {
+            path: renderProps.location.pathname,
+            query: renderProps.location.query,
+            params: renderProps.params,
+            dispatch: store.dispatch
+        };
 
+        Promise.all(
+            fetchers.map(fetcher => fetcher(params))
+        ).then(promises => {
 
+            console.log(store.getState());
 
+            const html = renderToString(
+                <Provider store={store}>
+                <RoutingContext {...renderProps} />
+                </Provider>
+            );
+        // console.log(renderProps.components);
 
-});
-
-
-
-
-
-
-
-/*
-match({ routes, location: '/' }, (error, redirectLocation, renderProps) => {
-
-    console.log(error, 'error');
-
-    console.log(redirectLocation, 'redir');
-
-    // console.log(renderProps, 'renderprops');
-
-    console.log(renderProps.components);
-
-    const content = renderToString(renderProps.components[0]);
+            console.log(html);
 
 
-    /*
-    const content = renderToString(
-        <Provider store={store}>
-            <RouterContext {...renderProps} />
-        </Provider>
-    );
+        }).catch(e => {
+            console.log(e);
+        })
 
-    console.log(content);
-    */
+        // console.log(Promise.all);
+
+        // console.log(components);
 
 
-    /*
-    if (error) {
-res.status(500).send(error.message)
-} else if (redirectLocation) {
-res.redirect(302, redirectLocation.pathname + redirectLocation.search)
-} else if (renderProps) {
-res.status(200).send(renderToString(<RouterContext {...renderProps} />))
-} else {
-res.status(404).send('Not found')
-}
-
+    });
 
 });
-*/
-

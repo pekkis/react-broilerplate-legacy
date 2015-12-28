@@ -10,8 +10,8 @@ export default function(store) {
 
     function hellurei(nextState, replacementState) {
 
-        const tussi = store.dispatch(receiveTodos());
-        console.log(tussi, 'tussi');
+        // const tussi = store.dispatch(receiveTodos());
+        // console.log(tussi, 'tussi');
 
         // setTimeout(() => callback(), 5000);
     };

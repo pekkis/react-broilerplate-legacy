@@ -5,11 +5,11 @@ export default {
     get: () => {
 
         return axios
-            .get('/api/todo')
+            .get('http://localhost:8888/api/todo')
             .then(response => response.data);
     },
 
     save: (todos) => {
-        return axios.post('/api/todo', todos);
+        return axios.post('http://localhost:8888/api/todo', todos);
     }
 };

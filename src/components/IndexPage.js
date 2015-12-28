@@ -1,21 +1,30 @@
 import React from 'react';
 import TodoForm from './TodoForm';
 import TodoLists from './TodoLists';
+import { prefetch, defer } from 'react-fetcher';
+import { receiveTodos } from '../actions/todo-actions';
 
-const IndexPage = props => {
+class IndexPage extends React.Component {
 
-    const { saveTodos, addTodo, isChanged, todos, toggleTodo, removeTodo, moveTodo } = props;
+    render() {
 
-    return (
+        const { saveTodos, addTodo, isChanged, todos, toggleTodo, removeTodo, moveTodo } = this.props;
 
-        <section>
-            <TodoLists todos={todos} onToggle={toggleTodo} onRemove={removeTodo} onMove={moveTodo} />
+        return (
 
-            <TodoForm onAdd={addTodo} />
+            <section>
+                <TodoLists todos={todos} onToggle={toggleTodo} onRemove={removeTodo} onMove={moveTodo} />
 
-            <button onClick={saveTodos.bind(null, todos)} disabled={!isChanged}>Save</button>
-        </section>
-    );
+                <TodoForm onAdd={addTodo} />
+
+                <button onClick={saveTodos.bind(null, todos)} disabled={!isChanged}>Save</button>
+            </section>
+        );
+    }
+};
+
+IndexPage.fetch = ({dispatch}) => {
+    return dispatch(receiveTodos());
 };
 
 export default IndexPage;
