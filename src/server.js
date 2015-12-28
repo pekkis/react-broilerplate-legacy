@@ -4,8 +4,19 @@ import { List } from 'immutable';
 import express from 'express';
 import webpack from 'webpack';
 
-import config from '../webpack.config';
+import config from '../webpack.config.babel';
 import bodyParser from 'body-parser';
+
+import store from './store';
+import { renderToString } from 'react-dom/server'
+import { match, RouterContext } from 'react-router'
+import routes from './routes';
+import React from 'react';
+
+import createHistory from 'history/lib/createMemoryHistory';
+import { Provider } from 'react-redux';
+import { Router } from 'react-router';
+
 
 const app = express();
 const compiler = webpack(config);
@@ -69,7 +80,23 @@ app.post('/api/todo', function(req, res, next) {
 });
 
 app.get('*', function(req, res, next) {
-  res.sendFile(path.join(__dirname, '/../web/index.dev.html'));
+
+    const history = createHistory();
+    const app = (
+        <Provider store={store}>
+            <Router history={history}>
+                {routes}
+            </Router>
+        </Provider>
+    );
+
+    const content = renderToString(app);
+
+    console.log(content);
+
+    res.send(content);
+
+  // res.sendFile(path.join(__dirname, '/../web/index.dev.html'));
 });
 
 

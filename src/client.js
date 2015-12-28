@@ -2,21 +2,18 @@ import './client.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import store from './store';
-import { Provider } from 'react-redux';
-import TodoApp from './components/smart/TodoAppContainer';
-import IndexPage from './components/smart/IndexPageContainer';
-import TodoPage from './components/smart/TodoPageContainer';
-
-import { Router, Route, IndexRoute } from 'react-router';
 import { createHistory } from 'history';
+import { Provider } from 'react-redux';
+import { Router } from 'react-router';
+
+const history = createHistory();
+
+import routes from './routes';
 
 const app = (
     <Provider store={store}>
-        <Router history={createHistory()}>
-            <Route path="/" component={TodoApp}>
-                <IndexRoute component={IndexPage}/>
-                <Route path="todo/:uuid" component={TodoPage}/>
-            </Route>
+        <Router history={history}>
+            {routes}
         </Router>
     </Provider>
 );

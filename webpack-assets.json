@@ -1,0 +1,9 @@
+{
+  "javascript": {
+    "main": "/client.js"
+  },
+  "styles": {},
+  "assets": {
+    "./src/images/top-secret.png": "/assets/images/8oi5Qw2s.png"
+  }
+}

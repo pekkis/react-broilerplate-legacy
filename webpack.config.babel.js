@@ -12,7 +12,18 @@ const PATHS = {
     test: path.join(__dirname, 'test')
 };
 
+const Webpack_isomorphic_tools_plugin = require('webpack-isomorphic-tools/plugin');
+
+const lusso = require('./webpack-isomorphic');
+
+const webpack_isomorphic_tools_plugin =
+  new Webpack_isomorphic_tools_plugin(require('./webpack-isomorphic'))
+    .development();
+
 const common = {
+
+    context: __dirname,
+
     module: {
         loaders: [
             {
@@ -48,7 +59,7 @@ const common = {
                 ]
             },
             {
-                test: /\.(jpe?g|png|gif)$/i,
+                test: webpack_isomorphic_tools_plugin.regular_expression('images'),
                 loaders: [
                     'file?hash=sha512&digest=hex&name=assets/images/[hash:base58:8].[ext]',
                     'img?minimize&optimizationLevel=5&progressive=true'
@@ -99,6 +110,7 @@ const envs = {
             filename: 'client.js'
         },
         plugins: [
+            webpack_isomorphic_tools_plugin,
             new webpack.optimize.OccurenceOrderPlugin(),
             new webpack.HotModuleReplacementPlugin(),
 
@@ -124,6 +136,7 @@ const envs = {
             filename: 'client.[hash].js'
         },
         plugins: [
+            webpack_isomorphic_tools_plugin,
             new webpack.optimize.OccurenceOrderPlugin(),
             new HtmlWebpackPlugin({
                 title: 'Pekkis Goes To Movies',

@@ -5,7 +5,7 @@
   "main": "src/client.js",
   "scripts": {
     "clean": "rm -r -f ./dist",
-    "build:webpack": "NODE_ENV=prod webpack --config webpack.config.js",
+    "build:webpack": "NODE_ENV=prod webpack --config webpack.config.babel.js",
     "build": "npm run clean && npm run build:webpack",
     "lint": "eslint src",
     "babel-node": "babel-node",
@@ -82,6 +82,7 @@
     "webpack": "1.12.9",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-dev-server": "^1.14.0",
-    "webpack-hot-middleware": "^2.6.0"
+    "webpack-hot-middleware": "^2.6.0",
+    "webpack-isomorphic-tools": "^2.2.24"
   }
 }
