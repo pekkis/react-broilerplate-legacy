@@ -1,4 +1,4 @@
-import Webpack_isomorphic_tools_plugin from 'webpack-isomorphic-tools/plugin';
+const Webpack_isomorphic_tools_plugin = require('webpack-isomorphic-tools/plugin');
 
 module.exports = {
   assets:

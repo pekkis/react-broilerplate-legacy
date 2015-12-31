@@ -116,8 +116,9 @@ const envs = {
 
             new HtmlWebpackPlugin({
                 title: 'JavaScript SchamaScript',
-                template: 'web/index.dev.html',
-                favicon: 'web/favicon.ico'
+                template: 'web/index.html',
+                favicon: 'web/favicon.ico',
+                inject: 'body'
             }),
             new webpack.DefinePlugin({
                 __DEVELOPMENT__: process.env.NODE_ENV === 'development',
@@ -140,7 +141,7 @@ const envs = {
             new webpack.optimize.OccurenceOrderPlugin(),
             new HtmlWebpackPlugin({
                 title: 'Pekkis Goes To Movies',
-                template: 'web/index.prod.html',
+                template: 'web/index.html',
                 favicon: 'web/favicon.ico',
                 inject: 'body',
             }),

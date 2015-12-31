@@ -1,9 +1,6 @@
 var webpackConfig = require('./webpack.config');
 webpackConfig.devtool = 'inline-source-map';
 
-console.log(webpackConfig.module);
-
-
 module.exports = function (config) {
   config.set({
     browsers: [ 'PhantomJS' ],
