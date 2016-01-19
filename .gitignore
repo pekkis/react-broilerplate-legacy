@@ -2,8 +2,9 @@
 /vendor
 node_modules/
 composer.phar
-src/config.js
-src/config-server.js
+config.client.js
+config.server.js
 dist/*
 .DS_Store
 coverage/
+webpack-assets.json

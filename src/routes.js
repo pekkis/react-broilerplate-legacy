@@ -2,10 +2,9 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import { receiveTodos } from './actions/todo-actions';
-import TodoApp from './components/smart/TodoAppContainer';
-import IndexPage from './components/smart/IndexPageContainer';
-import TodoPage from './components/smart/TodoPageContainer';
-
+import TodoApp from './components/container/TodoAppContainer';
+import IndexPage from './components/container/IndexPageContainer';
+import TodoPage from './components/container/TodoPageContainer';
 
 export function createRoutes({ store, history }) {
 

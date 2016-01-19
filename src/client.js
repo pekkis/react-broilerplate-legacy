@@ -1,16 +1,14 @@
-import './client.less';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import { createHistory } from 'history';
-
-import { createStore } from './broilerplate/redux';
-import { createApp } from './broilerplate/app';
+import { createStore } from './util/redux';
+import { createApp } from './util/app';
 
 import * as reducers from './reducers';
-
 import { createRoutes } from './routes';
+
+import './client.less';
 
 const history = createHistory();
 const store = createStore(reducers, history);

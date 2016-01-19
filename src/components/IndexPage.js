@@ -1,7 +1,6 @@
 import React from 'react';
 import TodoForm from './TodoForm';
 import TodoLists from './TodoLists';
-import { prefetch, defer } from 'react-fetcher';
 import { receiveTodos } from '../actions/todo-actions';
 
 class IndexPage extends React.Component {
