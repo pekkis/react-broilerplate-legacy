@@ -7,7 +7,7 @@ export default class TodoApp extends React.Component {
         return (
             <div>
                 <h1>
-                    <img src={require('../images/top-secret.png')} />
+                    Top Secret
                 </h1>
 
                 {this.props.children}

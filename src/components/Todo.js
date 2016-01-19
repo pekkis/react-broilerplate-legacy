@@ -3,14 +3,18 @@ import classnames from 'classnames';
 import { Link } from 'react-router';
 import Icon from 'react-fa';
 
+import styles from './Todo.pcss';
+
+console.log('styles', styles);
+
 const Todo = props => {
 
     const { todo, onRemove, onToggle, onMove } = props;
 
     const classes = classnames(
-        'todo',
+        styles.todo,
         {
-            done: todo.done
+            [styles.done]: todo.done
         }
     );
 

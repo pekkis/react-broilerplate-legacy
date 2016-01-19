@@ -8,7 +8,7 @@ import { createApp } from './util/app';
 import * as reducers from './reducers';
 import { createRoutes } from './routes';
 
-import './client.less';
+import './client.pcss';
 
 const history = createHistory();
 const store = createStore(reducers, history);

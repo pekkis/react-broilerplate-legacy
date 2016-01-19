@@ -5,6 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const Webpack_isomorphic_tools_plugin = require('webpack-isomorphic-tools/plugin');
 const merge = require('merge');
+var autoprefixer = require('autoprefixer');
+var precss = require('precss');
 
 const ENV = process.env.NODE_ENV;
 const PATHS = {
@@ -41,7 +43,10 @@ const common = {
                 test: /\.less$/,
                 loader: ExtractTextPlugin.extract(
                     'style-loader',
-                    'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!autoprefixer-loader?browsers=last 2 version!less-loader'
+                    [
+                        'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!autoprefixer-loader?browsers=last 2 version',
+                        'less-loader'
+                    ]
                 ),
                 include: [
                     PATHS.src,
@@ -49,8 +54,14 @@ const common = {
                 ]
             },
             {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'),
+                test: /\.pcss$/,
+                loader: ExtractTextPlugin.extract(
+                    'style-loader',
+                    [
+                        'css-loader?importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+                        'postcss-loader'
+                    ]
+                ),
                 include: [
                     PATHS.src,
                 ]
@@ -89,6 +100,9 @@ const common = {
                 ]
             }
         ]
+    },
+    postcss: function () {
+        return [autoprefixer, precss];
     },
     resolve: {
         modulesDirectories: ['node_modules'],
