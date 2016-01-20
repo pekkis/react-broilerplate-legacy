@@ -5,8 +5,6 @@ import Icon from 'react-fa';
 
 import styles from './Todo.pcss';
 
-console.log('styles', styles);
-
 const Todo = props => {
 
     const { todo, onRemove, onToggle, onMove } = props;

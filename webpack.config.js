@@ -26,6 +26,25 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const pkg = require('./package.json');
 
+function getStyleLoader(env, ret, loaders)
+{
+    let loader;
+    if (env !== 'prod') {
+        loaders.unshift('style-loader');
+        ret.loaders = loaders;
+    } else {
+        ret.loader = ExtractTextPlugin.extract(
+            'style-loader',
+            loaders
+        );
+    }
+
+    console.log(env, ret);
+
+    return ret;
+}
+
+
 const common = {
 
     context: __dirname,
@@ -39,40 +58,31 @@ const common = {
                     PATHS.modules,
                 ]
             },
-            {
-                test: /\.less$/,
-                loader: ExtractTextPlugin.extract(
-                    'style-loader',
-                    [
-                        'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!autoprefixer-loader?browsers=last 2 version',
-                        'less-loader'
+            getStyleLoader(
+                ENV,
+                {
+                   test: /\.p?css$/,
+                    include: [
+                        PATHS.src,
                     ]
-                ),
-                include: [
-                    PATHS.src,
-                    PATHS.modules
+                },
+                [
+                    'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!autoprefixer-loader?browsers=last 2 version',
+                    'postcss-loader'
                 ]
-            },
-            {
-                test: /\.pcss$/,
-                loader: ExtractTextPlugin.extract(
-                    'style-loader',
-                    [
-                        'css-loader?importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
-                        'postcss-loader'
+            ),
+            getStyleLoader(
+                ENV,
+                {
+                    test: /\.css$/,
+                    include: [
+                        PATHS.modules,
                     ]
-                ),
-                include: [
-                    PATHS.src,
+                },
+                [
+                    'css-loader'
                 ]
-            },
-            {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
-                include: [
-                    PATHS.modules,
-                ]
-            },
+            ),
             {
                 test: webpack_isomorphic_tools_plugin.regular_expression('images'),
                 loaders: [
@@ -131,8 +141,6 @@ const envs = {
             webpack_isomorphic_tools_plugin,
             new webpack.optimize.OccurenceOrderPlugin(),
             new webpack.HotModuleReplacementPlugin(),
-
-            new ExtractTextPlugin("styles.[contenthash].css"),
 
             new HtmlWebpackPlugin({
                 title: 'JavaScript SchamaScript',
