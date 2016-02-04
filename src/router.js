@@ -12,6 +12,7 @@ export function createRouter({ store, history }) {
 
         if (!this.component.fetch) {
             callback();
+            return;
         }
         this.component.fetch(store).then(callback);
     }
