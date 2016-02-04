@@ -1,15 +1,11 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router';
 
-
-export function createApp(store, history, routes) {
+export function createApp(store, history, router) {
 
     const app = (
         <Provider store={store}>
-            <Router history={history}>
-                {routes}
-            </Router>
+            {router}
         </Provider>
     );
 

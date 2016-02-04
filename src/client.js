@@ -1,24 +1,21 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createHistory } from 'history';
+import { browserHistory as history } from 'react-router';
 import { createStore } from './util/redux';
 import { createApp } from './util/app';
 
 import * as reducers from './reducers';
-import { createRoutes } from './routes';
+import { createRouter } from './router';
 
-import './client.pcss';
-
-const history = createHistory();
 const store = createStore(reducers, history);
 
-const routes = createRoutes({
+const router = createRouter({
     store,
     history
 });
 
-const app = createApp(store, history, routes);
+const app = createApp(store, history, router);
 
 ReactDOM.render(
     app,

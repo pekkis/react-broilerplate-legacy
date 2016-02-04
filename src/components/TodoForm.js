@@ -1,15 +1,21 @@
 import React from 'react';
 import uuid from 'node-uuid';
 
+import styles from './TodoForm.pcss';
+
 export default class TodoForm extends React.Component {
 
     render() {
 
         return (
-            <form onSubmit={this.onSubmit.bind(this)}>
-                <input ref="text" type="text" placeholder="what u wanna todo?" />
-                <button type="submit">Add</button>
-            </form>
+            <div className={styles.root}>
+                <form onSubmit={this.onSubmit.bind(this)}>
+
+                    <label>Got something to do?</label>
+                    <input ref="text" type="text" placeholder="What u gonna todo?" />
+                    <button type="submit">Add</button>
+                </form>
+            </div>
         );
 
     }
@@ -20,7 +26,6 @@ export default class TodoForm extends React.Component {
         const newTodo = {
             id: uuid.v4(),
             text: this.refs.text.value,
-            done: false,
             category: 0,
         };
 

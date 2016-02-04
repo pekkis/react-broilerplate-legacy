@@ -10,7 +10,6 @@ class IndexPage extends React.Component {
         const { saveTodos, addTodo, isChanged, todos, toggleTodo, removeTodo, moveTodo } = this.props;
 
         return (
-
             <section>
                 <TodoLists todos={todos} onToggle={toggleTodo} onRemove={removeTodo} onMove={moveTodo} />
 
@@ -22,8 +21,10 @@ class IndexPage extends React.Component {
     }
 };
 
+/*
 IndexPage.fetch = ({dispatch}) => {
     return dispatch(receiveTodos());
 };
+*/
 
 export default IndexPage;

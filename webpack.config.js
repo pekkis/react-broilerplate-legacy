@@ -10,10 +10,10 @@ var precss = require('precss');
 
 const ENV = process.env.NODE_ENV;
 const PATHS = {
-    src: path.join(__dirname, 'src'),
-    build: path.join(__dirname, 'dist'),
-    modules: path.join(__dirname, 'node_modules'),
-    test: path.join(__dirname, 'test')
+    src: path.resolve('./src'),
+    build: path.resolve('./dist'),
+    modules: path.resolve('./node_modules'),
+    test: path.resolve('./test')
 };
 
 let webpack_isomorphic_tools_plugin;
@@ -38,8 +38,6 @@ function getStyleLoader(env, ret, loaders)
             loaders
         );
     }
-
-    console.log(env, ret);
 
     return ret;
 }
@@ -67,7 +65,7 @@ const common = {
                     ]
                 },
                 [
-                    'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!autoprefixer-loader?browsers=last 2 version',
+                    'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
                     'postcss-loader'
                 ]
             ),
@@ -115,7 +113,10 @@ const common = {
         return [autoprefixer, precss];
     },
     resolve: {
-        modulesDirectories: ['node_modules'],
+        modulesDirectories: ['node_modules', 'src'],
+        root: [
+            PATHS.src,
+        ],
         extensions: ['', '.js', '.jsx']
     }
 };

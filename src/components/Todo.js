@@ -10,10 +10,7 @@ const Todo = props => {
     const { todo, onRemove, onToggle, onMove } = props;
 
     const classes = classnames(
-        styles.todo,
-        {
-            [styles.done]: todo.done
-        }
+        styles.root
     );
 
     return (
@@ -21,11 +18,12 @@ const Todo = props => {
 
             <Link to={`/todo/${todo.id}`}>{todo.text}</Link>
 
-            <button onClick={onToggle.bind(null, todo.id)}>Toggle</button>
-            <button onClick={onRemove.bind(null, todo.id)}>Remove</button>
+            <div>
+                <button onClick={onRemove.bind(null, todo.id)}>Remove</button>
 
-            {todo.category !== 0 && <button onClick={onMove.bind(null, todo.id, -1)}><Icon name="minus-circle" />-</button>}
-            {todo.category !== 2 && <button onClick={onMove.bind(null, todo.id, 1)}><Icon name="plus-circle" />+</button>}
+                {todo.category !== 0 && <button onClick={onMove.bind(null, todo.id, -1)}><Icon name="minus-circle" /></button>}
+                {todo.category !== 2 && <button onClick={onMove.bind(null, todo.id, 1)}><Icon name="plus-circle" /></button>}
+            </div>
 
         </li>
     );
