@@ -31,20 +31,6 @@ export default function(state = defaultState, action) {
                 .set('isChanged', true);
             break;
 
-        case TOGGLE_TODO:
-            return state
-                .updateIn(
-                    [
-                        'todos',
-                        state.get('todos').findIndex(t => t.id === action.payload)
-                    ], todo => ({
-                        ...todo,
-                        done: !todo.done
-                    })
-                )
-                .set('isChanged', true);
-            break;
-
         case REMOVE_TODO:
             return state
                 .deleteIn([

@@ -1,11 +1,9 @@
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import TodoPage from '../TodoPage';
+import Wrapped from '../TodoPage';
 
-function mapStateToProps(state) {
-    return {
-        todos: state.todo.get('todos'),
-    }
-}
 export default connect(
-    mapStateToProps
-)(TodoPage);
+    state => ({
+        todos: state.todo.get('todos'),
+    })
+)(Wrapped);

@@ -6,19 +6,17 @@ import { createStore } from './util/redux';
 import { createApp } from './util/app';
 
 import * as reducers from './reducers';
-import { createRoutes } from './routes';
-
-import './client.pcss';
+import { createRouter } from './router';
 
 const history = createHistory();
 const store = createStore(reducers, history);
 
-const routes = createRoutes({
+const router = createRouter({
     store,
     history
 });
 
-const app = createApp(store, history, routes);
+const app = createApp(store, history, router);
 
 ReactDOM.render(
     app,

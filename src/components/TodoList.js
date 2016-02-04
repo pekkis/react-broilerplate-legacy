@@ -1,5 +1,7 @@
 import React from 'react';
 import Todo from './Todo';
+import styles from './TodoList.pcss';
+import cx from 'classnames';
 
 const categoryNames = [
     'TODO',
@@ -7,13 +9,18 @@ const categoryNames = [
     'DONE'
 ];
 
-
 const TodoList = ({ todos, onRemove, onToggle, category, onMove }) => {
 
     const filtered = todos.filter(todo => todo.category === category);
 
+    const rootClasses = cx(
+        styles.root
+    );
+
     return (
-        <td>
+        <div className={rootClasses}>
+            <div className={styles.inner}>
+
             <h2>{filtered.count()} todos in category {categoryNames[category]}</h2>
 
             <ul>
@@ -29,7 +36,8 @@ const TodoList = ({ todos, onRemove, onToggle, category, onMove }) => {
                     )
                 }
             </ul>
-        </td>
+            </div>
+        </div>
     )
 
 }
