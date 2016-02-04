@@ -23,7 +23,6 @@ export function removeTodo(id) {
 }
 
 export function moveTodo(id, direction) {
-
     return {
         type: MOVE_TODO,
         payload: {
@@ -33,12 +32,8 @@ export function moveTodo(id, direction) {
     };
 }
 
-
-
 export function receiveTodos() {
-
     return function(dispatch) {
-
         return todoService.get().then(todos => {
             dispatch({
                 type: RECEIVE_TODOS,
@@ -46,22 +41,15 @@ export function receiveTodos() {
             });
         });
     };
-
 }
 
 export function saveTodos(todos) {
-
-    console.log(todos, 'saving my todos');
-
     return function(dispatch) {
-
         return todoService.save(todos).then(() => {
             dispatch({
                 type: SAVE_TODOS
             });
         });
-
     };
-
 }
 

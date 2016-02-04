@@ -1,6 +1,6 @@
 import { createStore as reduxCreateStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import { syncHistory, routeReducer } from 'redux-simple-router'
+import { syncHistory, routeReducer } from 'react-router-redux';
 import { createHistory } from 'history';
 
 export function createStore(reducers, history) {
