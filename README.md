@@ -1,25 +1,44 @@
 An application Bootstrap
 =========================
 
-A webpack-based application broilerplate.
+An application broilerplate I use and vampirize to start new projects.
+Maintaining it seems to be a full-time job. Thanks, Obama!
+
+Different branches hold different stuff. Master holds "current" stuff
+(obsoleted yesterday).
+
+My goal is to keep some "copy-paste and cry a bit" level updatability when stuff
+evolves. I now have like 5+ projects that "share" this stuff.
+
+Pull requests are accepted. If you vampirize this, vampirize something back
+please! :D
 
 Use as you wish, but still read the license from LICENSE.
-
-Different branches hold different stuff. Not per se maintaining,
-use as you like.
 
 Requirements
 -------------
 
-- A relatively new Node.js. I'm running 5.x nowadays.
+- A relatively new Node.js. I'm running 5.x nowadays. Nobody really knows.
+
+Stack
+------
+
+- Webpack
+- Babel
+- React
+- Redux
+- React-Redux-Router
+- PostCSS
+- CSS modules
+- JSS and Pacomo optional stuffsters.
+- Lots of stuff that was invented or obsoleted yesterday.
+- Testing, universality and some other stuff are still in progress.
 
 Instructions
 -------------
 
 - install node.js
-- install sublime text 3, package manager and babel package
 - npm -v
-- if your npm is still 2.x: npm -g update npm
 - npm install -g nodemon
 - npm install
 - npm run start
