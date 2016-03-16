@@ -1,6 +1,8 @@
 An application Bootstrap
 =========================
 
+OBS! This is legacy! [Here be current stuff](https://github.com/pekkis/react-broilerplate-project). Started to modularize this shit a while ago...
+
 An application broilerplate I use and vampirize to start new projects.
 Maintaining it seems to be a full-time job. Thanks, Obama!
 
